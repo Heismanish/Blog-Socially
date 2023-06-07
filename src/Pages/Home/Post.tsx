@@ -1,4 +1,5 @@
 import { Post as IPost } from "./Home";
+import styles from "./Post.module.css";
 import {
 	getDocs,
 	addDoc,
@@ -15,6 +16,7 @@ import { useEffect, useState } from "react";
 
 interface Props {
 	post: IPost;
+	setPostsList?: any;
 }
 
 interface Like {
@@ -28,6 +30,7 @@ export const Post = (props: Props) => {
 	const [likes, setLikes] = useState<Like[] | null>();
 
 	const likesRef = collection(db, "Likes");
+	// const postsRef = collection(db, "posts");
 
 	const likesDoc = query(likesRef, where("postId", "==", post.id));
 
@@ -82,22 +85,50 @@ export const Post = (props: Props) => {
 		getLikes();
 	}, []);
 
+	// Delete post
+
+	// const deletePost = async () => {
+	// await deleteDoc(doc(db, "posts", "pHOIQvcH7Q5eis3RKMfe"));
+	// 	try {
+	// 		const postToDeleteQuery = query(
+	// 			postsRef,
+	// 			where("postId", "==", post?.postId),
+	// 			where("userId", "==", user?.uid)
+	// 		);
+	// 		const postToDeleteData = await getDocs(postToDeleteQuery);
+	// 		console.log(postToDeleteData.docs);
+	// 		const postId = postToDeleteData.docs[0].id;
+	// 		const postToDelete = doc(db, "Likes", postToDeleteData.docs[0].id);
+	// 		await deleteDoc(postToDelete);
+	// 		// if (user) {
+	// 		// 	setPostsList((prev) => prev?.filter((post) => post.postID !== postId));
+	// 		// }
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
+
 	return (
-		<>
-			<div className="title">
-				<h1>{post.title}</h1>
+		<div className={styles.post}>
+			<div className={styles.title}>
+				<p>{post.title}</p>
 			</div>
-			<div className="body">
+			<div className={styles.body}>
 				<p>{post.description}</p>
 			</div>
-			<div className="footer">
+			<div className={styles.footer}>
 				<p>@{post.username}</p>
 
-				<button onClick={isLikedByUser ? removeLike : addLike}>
+				<button
+					className={styles.likebtn}
+					onClick={isLikedByUser ? removeLike : addLike}
+				>
 					{isLikedByUser ? <> &#128078;</> : <>&#128077;</>}
 				</button>
 				{likes && <p>Likes: {likes.length}</p>}
 			</div>
-		</>
+
+			<button>&#128465;</button>
+		</div>
 	);
 };

@@ -2,7 +2,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { Post } from "./Post";
-
+import styles from "./Home.module.css";
 export interface Post {
 	id: string;
 	userId: string;
@@ -26,10 +26,11 @@ export const Home = () => {
 	}, []);
 
 	return (
-		<>
+		<div className={!postsList ? styles.emptymsg : styles.posts}>
+			{!postsList && <h2>Login to see the posts</h2>}
 			{postsList?.map((post) => (
-				<Post post={post} />
+				<Post post={post} setPostsList={setPostsList} />
 			))}
-		</>
+		</div>
 	);
 };

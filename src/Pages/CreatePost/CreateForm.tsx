@@ -5,7 +5,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-
+import styles from "./CreateFrom.module.css";
 export interface createFormData {
 	title: string;
 	description: string;
@@ -20,7 +20,8 @@ export const CreateForm = () => {
 		description: yup
 			.string()
 			.required("You can not post without a description ")
-			.max(300),
+			.max(500)
+			.min(3),
 	});
 
 	const {
@@ -42,13 +43,20 @@ export const CreateForm = () => {
 		navigate("/");
 	};
 	return (
-		<form onSubmit={handleSubmit(onCreatePost)}>
-			<input placeholder="Title..." {...register("title")} />
-			<p style={{ color: "red" }}>{errors.title?.message}</p>
-			<textarea placeholder="Description..." {...register("description")} />
-			<p style={{ color: "red" }}>{errors.description?.message}</p>
+		<>
+			<form onSubmit={handleSubmit(onCreatePost)} className={styles.form}>
+				<input placeholder="Title..." {...register("title")} />
+				<p style={{ color: "red" }}>{errors.title?.message}</p>
+				<textarea
+					placeholder="Description..."
+					{...register("description")}
+					rows={5}
+					cols={40}
+				/>
+				<p style={{ color: "red" }}>{errors.description?.message}</p>
 
-			<input type="submit" />
-		</form>
+				<input type="submit" className={styles.submit} />
+			</form>
+		</>
 	);
 };

@@ -1,0 +1,12 @@
+.emptymsg {
+	display: flex;
+	height: 60vh;
+	justify-content: center;
+	align-items: center;
+	font-weight: 500;
+}
+
+.posts {
+	display: flex;
+	flex-direction: column;
+}

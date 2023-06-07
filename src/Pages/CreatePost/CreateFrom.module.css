@@ -1,0 +1,18 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.submit {
+	background-color: rgba(150, 155, 170, 0.1);
+	padding: 0.5em 0.9em;
+	border-radius: 1em;
+	border: 1px solid white;
+}
+
+.submit:hover {
+	background-color: rgba(150, 155, 170, 0.4);
+	cursor: pointer;
+}

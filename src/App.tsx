@@ -7,15 +7,17 @@ import { CreatePost } from "./Pages/CreatePost/CreatePost";
 function App() {
 	return (
 		<>
-			<Router>
-				<Navbar></Navbar>
-				<Routes>
-					<Route path="/" element={<Home />}></Route>
-					<Route path="/login" element={<Login />}></Route>
-					<Route path="/create-post" element={<CreatePost />}></Route>
-					<Route path="/" element={<Home />}></Route>
-				</Routes>
-			</Router>
+			<div>
+				<Router>
+					<Navbar></Navbar>
+					<Routes>
+						<Route path="/" element={<Home />}></Route>
+						<Route path="/login" element={<Login />}></Route>
+						<Route path="/create-post" element={<CreatePost />}></Route>
+						<Route path="/" element={<Home />}></Route>
+					</Routes>
+				</Router>
+			</div>
 		</>
 	);
 }
