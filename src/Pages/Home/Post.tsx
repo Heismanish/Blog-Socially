@@ -1,4 +1,4 @@
-import { Post as IPost } from "./Home";
+import { Post as IPost } from "./Home.tsx";
 import styles from "./Post.module.css";
 import {
 	getDocs,

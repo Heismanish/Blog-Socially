@@ -1,9 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home } from "./Pages/Home/Home";
-import { Login } from "./Pages/Login";
-import { Navbar } from "./Components/Navbar";
-import { CreatePost } from "./Pages/CreatePost/CreatePost";
+import { Home } from "./Pages/Home/Home.tsx";
+import { Login } from "./Pages/Login.tsx";
+import { Navbar } from "./Components/Navbar.tsx";
+import { CreatePost } from "./Pages/CreatePost/CreatePost.tsx";
 function App() {
 	return (
 		<>
