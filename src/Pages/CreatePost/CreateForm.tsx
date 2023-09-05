@@ -42,6 +42,7 @@ export const CreateForm = () => {
 		});
 		navigate("/");
 	};
+
 	return (
 		<>
 			<form onSubmit={handleSubmit(onCreatePost)} className={styles.form}>

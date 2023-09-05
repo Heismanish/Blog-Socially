@@ -10,7 +10,6 @@ import {
 	doc,
 } from "firebase/firestore";
 import { db, auth } from "../../config/firebase";
-
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 
@@ -88,7 +87,7 @@ export const Post = (props: Props) => {
 	// Delete post
 
 	// const deletePost = async () => {
-	// await deleteDoc(doc(db, "posts", "pHOIQvcH7Q5eis3RKMfe"));
+	// 	await deleteDoc(doc(db, "posts", "pHOIQvcH7Q5eis3RKMfe"));
 	// 	try {
 	// 		const postToDeleteQuery = query(
 	// 			postsRef,
@@ -108,6 +107,26 @@ export const Post = (props: Props) => {
 	// 	}
 	// };
 
+	const deletePost = async () => {
+		try {
+			// Ensure that the user is the creator of the post before allowing deletion
+			if (user?.uid === post.userId) {
+				const postToDelete = doc(db, "posts", post.id);
+				await deleteDoc(postToDelete);
+				// Optionally, you can also update the state to remove the deleted post from the UI
+				if (props.setPostsList) {
+					props.setPostsList((prevPosts: IPost[]) =>
+						prevPosts.filter((prevPost: IPost) => prevPost.id !== post.id)
+					);
+				}
+			} else {
+				console.log("You do not have permission to delete this post.");
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	return (
 		<div className={styles.post}>
 			<div className={styles.title}>
@@ -126,9 +145,8 @@ export const Post = (props: Props) => {
 					{isLikedByUser ? <> &#128078;</> : <>&#128077;</>}
 				</button>
 				{likes && <p>Likes: {likes.length}</p>}
+				<button onClick={deletePost}>&#128465;</button>
 			</div>
-
-			<button>&#128465;</button>
 		</div>
 	);
 };

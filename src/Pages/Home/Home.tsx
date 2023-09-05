@@ -3,6 +3,7 @@ import { db } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { Post } from "./Post.tsx";
 import styles from "./Home.module.css";
+
 export interface Post {
 	id: string;
 	userId: string;
@@ -10,6 +11,7 @@ export interface Post {
 	description: string;
 	username: string;
 }
+
 export const Home = () => {
 	const [postsList, setPostsList] = useState<Post[] | null>(null);
 	const postRef = collection(db, "posts");
